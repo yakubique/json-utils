@@ -2,6 +2,7 @@ import * as core from '@actions/core';
 import { Inputs, Types } from "./common";
 
 import * as diff from './modules/diff';
+import * as sort from './modules/sort';
 
 function isBlank(value: any): boolean {
     return value === null || value === undefined || (value.length !== undefined && value.length === 0);
@@ -21,13 +22,16 @@ export interface ActionInputs {
 }
 
 const availableActions = [
-    diff.ACTION
+    diff.ACTION,
+    sort.ACTION,
 ];
 const requirements: { [key: string]: Inputs[] } = {
     [diff.ACTION]: diff.RequiredFields,
+    [sort.ACTION]: sort.RequiredFields,
 }
 const modifiers: { [key: string]: string[] } = {
     [diff.ACTION]: diff.ModifierValues,
+    [sort.ACTION]: sort.ModifierValues,
 }
 
 export function getInputs(): ActionInputs {
@@ -59,10 +63,10 @@ export function getInputs(): ActionInputs {
     let modifier = core.getInput(Inputs.Modifier, { required: requiredFields.includes(Inputs.Modifier) })
     if (isBlank(modifier)) {
         modifier = modifierValues[0];
-    } else if (!modifierValues.includes(modifier)) {
+    } else if (!modifierValues.includes(modifier.toUpperCase())) {
         throw new Error(`Unexpected modifier value: ${modifier}`)
     }
-    result.modifier = modifier;
+    result.modifier = modifier.toUpperCase();
 
     return result;
 }

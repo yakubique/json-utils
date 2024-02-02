@@ -9,14 +9,14 @@ export const RequiredFields: Inputs[] = [
 ];
 
 export enum DiffModifiers {
-    Left = 'left',
-    Right = 'right'
+    Left = 'LEFT',
+    Right = 'RIGHT'
 }
 
 export const ModifierValues: string[] = [
-    DiffModifiers.Left.toString(),
-    DiffModifiers.Right.toString(),
-];
+    DiffModifiers.Left,
+    DiffModifiers.Right,
+].map(x => x.toString());
 
 export function diff<T>(left: T[], right: T[], direction: string = DiffModifiers.Left): T[] {
     if (direction === DiffModifiers.Left) {
