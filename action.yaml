@@ -1,0 +1,26 @@
+name: "JSON Utils"
+description: A collection of handy utilities for working with JSON in GitHub Actions, making it easier to manipulate JSON data.
+author: Vladimir Levin
+branding:
+  icon: code
+  color: purple
+inputs:
+  input:
+    description: 'JSON string/Value from other action'
+    required: true
+  secondary:
+    description: 'Secondary JSON string/Value from other action (useful for some actions)'
+  action:
+    description: 'What to do with input JSON'
+  type:
+    description: 'Type of input data `["flat-json", "nested-json"]` (default: "flat-json")'
+  key:
+    description: If `type="nested-json"` - which key should be used
+  modifier:
+    description: "Suitable modifier for performed action (ex: 'ASC'/'DESC' for 'sort')"
+outputs:
+  result: # id of output
+    description: Input JSON minus `values`
+runs:
+  using: 'node20'
+  main: 'action/index.js'
