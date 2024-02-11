@@ -1,6 +1,6 @@
 {
   "name": "json-utils",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A collection of handy utilities for working with JSON in GitHub Actions, making it easier to manipulate JSON data",
   "main": "action/index.js",
   "scripts": {
