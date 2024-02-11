@@ -4,7 +4,7 @@ import { Types } from "./common";
 import * as difference from "./modules/diff";
 import * as sort from "./modules/sort";
 import * as pick from "./modules/pick";
-import { pickBy } from "./modules/pick";
+import * as get from "./modules/get";
 
 enum Outputs {
     result = 'result',
@@ -40,7 +40,9 @@ function setOutputs(response: any, log?: boolean) {
         }
 
         if (inputs.action === pick.ACTION) {
-            result = pickBy(input, inputs.key as string)
+            result = pick.pickBy(input, inputs.key as string)
+        } else if (inputs.action === get.ACTION) {
+            result = get.getBy(input, inputs.key as string)
         }
 
         if (inputs.type === Types.FlatJSON.toString()) {

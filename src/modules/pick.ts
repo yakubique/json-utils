@@ -11,5 +11,7 @@ export const RequiredFields: Inputs[] = [
 export const ModifierValues: string[] = ['<unknown>']
 
 export function pickBy<T>(source: T[], key: string): any[] {
-    return source.map(x => pick(x, key))
+    let keys = key.includes(',') ? key.split(',').filter(Boolean) : [key];
+
+    return source.map(x => pick(x, keys))
 }

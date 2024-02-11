@@ -4,6 +4,7 @@ import { Inputs, Types } from "./common";
 import * as diff from './modules/diff';
 import * as sort from './modules/sort';
 import * as pick from './modules/pick';
+import * as get from './modules/get';
 
 function isBlank(value: any): boolean {
     return value === null || value === undefined || (value.length !== undefined && value.length === 0);
@@ -26,16 +27,19 @@ const availableActions = [
     diff.ACTION,
     sort.ACTION,
     pick.ACTION,
+    get.ACTION,
 ];
 const requirements: { [key: string]: Inputs[] } = {
     [diff.ACTION]: diff.RequiredFields,
     [sort.ACTION]: sort.RequiredFields,
     [pick.ACTION]: pick.RequiredFields,
+    [get.ACTION]: get.RequiredFields,
 }
 const modifiers: { [key: string]: string[] } = {
     [diff.ACTION]: diff.ModifierValues,
     [sort.ACTION]: sort.ModifierValues,
     [pick.ACTION]: pick.ModifierValues,
+    [get.ACTION]: get.ModifierValues,
 }
 
 export function getInputs(): ActionInputs {
