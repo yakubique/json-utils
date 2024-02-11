@@ -92,3 +92,21 @@ jobs:
           echo "Expecting {"name":"v0.3.34","tag_name":"v0.3.34","prerelease":false,"published_at":"2023-11-12T11:21:59Z"}"
           echo "${{ steps.sort_array_nested.outputs.result }}"
           test "${{ steps.sort_array_nested.outputs.result }}" == "[{name:v0.3.34,tag_name:v0.3.34,prerelease:false,published_at:2023-11-12T11:21:59Z},{name:v0.3.31,tag_name:v0.3.31,prerelease:false,published_at:2023-11-12T11:17:17Z},{name:v0.3.26,tag_name:v0.3.26,prerelease:false,published_at:2023-08-07T09:43:28Z},{name:v0.3.25,tag_name:v0.3.25,prerelease:false,published_at:2023-11-12T11:01:20Z},{name:v0.3.23,tag_name:v0.3.23,prerelease:false,published_at:2023-11-12T10:59:27Z},{name:v0.3.22,tag_name:v0.3.22,prerelease:false,published_at:2023-11-12T10:58:00Z}]"
+
+  test-pick:
+    runs-on: [ "ubuntu-latest" ]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Pick "name"
+        id: pick_name
+        uses: ./ # Uses an action in the root directory
+        with:
+          input: '[{"name":"v0.3.26","tag_name":"v0.3.26","prerelease":false,"published_at":"2023-08-07T09:43:28Z"},{"name":"v0.3.22","tag_name":"v0.3.22","prerelease":false,"published_at":"2023-11-12T10:58:00Z"},{"name":"v0.3.23","tag_name":"v0.3.23","prerelease":false,"published_at":"2023-11-12T10:59:27Z"},{"name":"v0.3.25","tag_name":"v0.3.25","prerelease":false,"published_at":"2023-11-12T11:01:20Z"},{"name":"v0.3.31","tag_name":"v0.3.31","prerelease":false,"published_at":"2023-11-12T11:17:17Z"},{"name":"v0.3.34","tag_name":"v0.3.34","prerelease":false,"published_at":"2023-11-12T11:21:59Z"}]'
+          action: "pick"
+          key: "name"
+      - name: Test 2
+        run: |
+          echo "Expecting"
+          echo "${{ steps.pick_name.outputs.result }}"
+          test "${{ steps.pick_name.outputs.result }}" == "[{name:v0.3.34,tag_name:v0.3.34,prerelease:false,published_at:2023-11-12T11:21:59Z},{name:v0.3.31,tag_name:v0.3.31,prerelease:false,published_at:2023-11-12T11:17:17Z},{name:v0.3.26,tag_name:v0.3.26,prerelease:false,published_at:2023-08-07T09:43:28Z},{name:v0.3.25,tag_name:v0.3.25,prerelease:false,published_at:2023-11-12T11:01:20Z},{name:v0.3.23,tag_name:v0.3.23,prerelease:false,published_at:2023-11-12T10:59:27Z},{name:v0.3.22,tag_name:v0.3.22,prerelease:false,published_at:2023-11-12T10:58:00Z}]"

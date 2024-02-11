@@ -3,6 +3,8 @@ import { ActionInputs, getInputs } from './io-helper';
 import { Types } from "./common";
 import * as difference from "./modules/diff";
 import * as sort from "./modules/sort";
+import * as pick from "./modules/pick";
+import { pickBy } from "./modules/pick";
 
 enum Outputs {
     result = 'result',
@@ -37,6 +39,9 @@ function setOutputs(response: any, log?: boolean) {
             secondary = JSON.parse(inputs.secondary) as any[];
         }
 
+        if (inputs.action === pick.ACTION) {
+            result = pickBy(input, inputs.key as string)
+        }
 
         if (inputs.type === Types.FlatJSON.toString()) {
             if (inputs.action === difference.ACTION) {
