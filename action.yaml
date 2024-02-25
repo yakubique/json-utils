@@ -18,6 +18,10 @@ inputs:
     description: If `type="nested-json"` - which key should be used
   modifier:
     description: "Suitable modifier for performed action (ex: 'ASC'/'DESC' for 'sort')"
+  from_file:
+    description: Load input from file (applied to secondary too)
+  to_file:
+    description: Output to file
 outputs:
   result: # id of output
     description: Input JSON minus `values`

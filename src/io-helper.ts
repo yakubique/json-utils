@@ -5,6 +5,7 @@ import * as diff from './modules/diff';
 import * as sort from './modules/sort';
 import * as pick from './modules/pick';
 import * as get from './modules/get';
+import { InputOptions } from "@actions/core";
 
 function isBlank(value: any): boolean {
     return value === null || value === undefined || (value.length !== undefined && value.length === 0);
@@ -14,6 +15,14 @@ export function isNotBlank(value: any): boolean {
     return value !== null && value !== undefined && (value.length === undefined || value.length > 0);
 }
 
+export function getBooleanInput(name: string, options?: InputOptions): boolean {
+    const value = core.getInput(name, options);
+
+    return isNotBlank(value) &&
+        ['y', 'yes', 't', 'true', 'e', 'enable', 'enabled', 'on', 'ok', '1']
+            .includes(value.trim().toLowerCase());
+}
+
 export interface ActionInputs {
     input: string;
     secondary: string | undefined;
@@ -21,6 +30,8 @@ export interface ActionInputs {
     type: string;
     key: string | undefined;
     modifier: string | undefined;
+    fromFile: boolean;
+    toFile: boolean;
 }
 
 const availableActions = [
@@ -75,6 +86,9 @@ export function getInputs(): ActionInputs {
         throw new Error(`Unexpected modifier value: ${modifier}`)
     }
     result.modifier = modifier.toUpperCase();
+
+    result.fromFile = getBooleanInput(Inputs.FromFile, { required: false })
+    result.toFile = getBooleanInput(Inputs.ToFile, { required: false })
 
     return result;
 }

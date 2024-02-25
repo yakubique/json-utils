@@ -5,6 +5,8 @@ import * as difference from "./modules/diff";
 import * as sort from "./modules/sort";
 import * as pick from "./modules/pick";
 import * as get from "./modules/get";
+import { readFileSync, writeFileSync } from "node:fs";
+import { temporaryFile } from "./utils";
 
 enum Outputs {
     result = 'result',
@@ -28,7 +30,14 @@ function setOutputs(response: any, log?: boolean) {
 (async function run() {
     try {
         const inputs: ActionInputs = getInputs();
-        const input = JSON.parse(inputs.input) as any[]
+        let input = [] as any[];
+
+        if (inputs.fromFile) {
+            input = JSON.parse(readFileSync(inputs.input, { encoding: 'utf8' }).toString()) as any[]
+        } else {
+            input = JSON.parse(inputs.input) as any[]
+        }
+
         let secondary: any[] | undefined = undefined;
 
         core.info(JSON.stringify(inputs))
@@ -36,7 +45,11 @@ function setOutputs(response: any, log?: boolean) {
         let result: any[] = [];
 
         if (inputs.secondary) {
-            secondary = JSON.parse(inputs.secondary) as any[];
+            if (inputs.fromFile) {
+                secondary = JSON.parse(readFileSync(inputs.secondary, { encoding: 'utf8' }).toString()) as any[];
+            } else {
+                secondary = JSON.parse(inputs.secondary) as any[];
+            }
         }
 
         if (inputs.action === pick.ACTION) {
@@ -61,7 +74,17 @@ function setOutputs(response: any, log?: boolean) {
             }
         }
 
-        setOutputs({ result })
+        let resPath;
+
+        if (inputs.toFile) {
+            resPath = temporaryFile({ extension: 'json' });
+            writeFileSync(resPath, JSON.stringify(result))
+
+            setOutputs({ result: resPath })
+        } else {
+            setOutputs({ result })
+        }
+
 
         core.info('Success!');
     } catch (err: any) {

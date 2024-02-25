@@ -5,6 +5,8 @@ export enum Inputs {
     Modifier = 'modifier',
     Action = 'action',
     Key = 'key',
+    FromFile = 'from_file',
+    ToFile = 'to_file',
 }
 
 export enum Types {

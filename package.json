@@ -31,7 +31,8 @@
     "lodash.differenceby": "^4.8.0",
     "lodash.get": "^4.4.2",
     "lodash.orderby": "^4.6.0",
-    "lodash.pick": "^4.4.0"
+    "lodash.pick": "^4.4.0",
+    "nanoid": "^5.0.6"
   },
   "devDependencies": {
     "@types/lodash.difference": "^4.5.9",
