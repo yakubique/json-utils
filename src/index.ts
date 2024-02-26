@@ -5,51 +5,24 @@ import * as difference from "./modules/diff";
 import * as sort from "./modules/sort";
 import * as pick from "./modules/pick";
 import * as get from "./modules/get";
-import { readFileSync, writeFileSync } from "node:fs";
-import { temporaryFile } from "./utils";
+import { buildOutput, inputJson, outputJson } from "@yakubique/atils/dist";
 
 enum Outputs {
     result = 'result',
 }
 
-function setOutputs(response: any, log?: boolean) {
-    let message = '';
-    for (const key in Outputs) {
-        const field: string = (Outputs as any)[key];
-        if (log) {
-            message += `\n  ${field}: ${JSON.stringify(response[field])}`;
-        }
-        core.setOutput(field, response[field]);
-    }
-
-    if (log) {
-        core.info('Outputs:' + message);
-    }
-}
+const setOutputs = buildOutput(Outputs);
 
 (async function run() {
     try {
         const inputs: ActionInputs = getInputs();
-        let input = [] as any[];
-
-        if (inputs.fromFile) {
-            input = JSON.parse(readFileSync(inputs.input, { encoding: 'utf8' }).toString()) as any[]
-        } else {
-            input = JSON.parse(inputs.input) as any[]
-        }
+        let input = inputJson(inputs.input, inputs.fromFile) as any[];
 
         let secondary: any[] | undefined = undefined;
-
-        core.info(JSON.stringify(inputs))
-
         let result: any[] = [];
 
         if (inputs.secondary) {
-            if (inputs.fromFile) {
-                secondary = JSON.parse(readFileSync(inputs.secondary, { encoding: 'utf8' }).toString()) as any[];
-            } else {
-                secondary = JSON.parse(inputs.secondary) as any[];
-            }
+            secondary = inputJson(inputs.secondary, inputs.fromFile)
         }
 
         if (inputs.action === pick.ACTION) {
@@ -74,17 +47,7 @@ function setOutputs(response: any, log?: boolean) {
             }
         }
 
-        let resPath;
-
-        if (inputs.toFile) {
-            resPath = temporaryFile({ extension: 'json' });
-            writeFileSync(resPath, JSON.stringify(result))
-
-            setOutputs({ result: resPath })
-        } else {
-            setOutputs({ result })
-        }
-
+        setOutputs({ result: outputJson(result, inputs.toFile) })
 
         core.info('Success!');
     } catch (err: any) {

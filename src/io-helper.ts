@@ -5,23 +5,7 @@ import * as diff from './modules/diff';
 import * as sort from './modules/sort';
 import * as pick from './modules/pick';
 import * as get from './modules/get';
-import { InputOptions } from "@actions/core";
-
-function isBlank(value: any): boolean {
-    return value === null || value === undefined || (value.length !== undefined && value.length === 0);
-}
-
-export function isNotBlank(value: any): boolean {
-    return value !== null && value !== undefined && (value.length === undefined || value.length > 0);
-}
-
-export function getBooleanInput(name: string, options?: InputOptions): boolean {
-    const value = core.getInput(name, options);
-
-    return isNotBlank(value) &&
-        ['y', 'yes', 't', 'true', 'e', 'enable', 'enabled', 'on', 'ok', '1']
-            .includes(value.trim().toLowerCase());
-}
+import { getBooleanInput, getOptional, isBlank } from "@yakubique/atils/dist";
 
 export interface ActionInputs {
     input: string;
@@ -68,12 +52,7 @@ export function getInputs(): ActionInputs {
     result.input = `${core.getInput(Inputs.Input, { required: requiredFields.includes(Inputs.Input) })}`
     result.secondary = `${core.getInput(Inputs.Secondary, { required: requiredFields.includes(Inputs.Secondary) })}`
 
-    const typeVar = core.getInput(Inputs.Type, { required: requiredFields.includes(Inputs.Type) })
-    if (isBlank(typeVar)) {
-        result.type = Types.FlatJSON
-    } else {
-        result.type = typeVar
-    }
+    result.type = getOptional(Inputs.Type, Types.FlatJSON, { required: requiredFields.includes(Inputs.Type) })
 
     if (result.type == Types.NestedJSON || requiredFields.includes(Inputs.Key)) {
         result.key = core.getInput(Inputs.Key, { required: true })

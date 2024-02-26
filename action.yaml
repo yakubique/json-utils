@@ -20,8 +20,10 @@ inputs:
     description: "Suitable modifier for performed action (ex: 'ASC'/'DESC' for 'sort')"
   from_file:
     description: Load input from file (applied to secondary too)
+    default: 'false'
   to_file:
     description: Output to file
+    default: 'false'
 outputs:
   result: # id of output
     description: Input JSON minus `values`
