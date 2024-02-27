@@ -1,8 +1,8 @@
 import difference from 'lodash.difference';
 import differenceBy from 'lodash.differenceby';
-import { Inputs } from "../common";
+import { Inputs } from '../common';
 
-export const ACTION = "diff"
+export const ACTION = 'diff';
 export const RequiredFields: Inputs[] = [
     Inputs.Input,
     Inputs.Secondary
@@ -15,7 +15,7 @@ export enum DiffModifiers {
 
 export const ModifierValues: string[] = [
     DiffModifiers.Left,
-    DiffModifiers.Right,
+    DiffModifiers.Right
 ].map(x => x.toString());
 
 export function diff<T>(left: T[], right: T[], direction: string = DiffModifiers.Left): T[] {

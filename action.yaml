@@ -11,7 +11,7 @@ inputs:
   secondary:
     description: 'Secondary JSON string/Value from other action (useful for some actions)'
   action:
-    description: 'What to do with input JSON'
+    description: 'What to do with input JSON (available: "diff", "get", "pick", "skip")'
   type:
     description: 'Type of input data `["flat-json", "nested-json"]` (default: "flat-json")'
   key:
