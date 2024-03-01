@@ -40,6 +40,13 @@
   resolved "https://registry.npmjs.org/@pkgjs/parseargs/-/parseargs-0.11.0.tgz"
   integrity sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==
 
+"@types/lodash.concat@^4.5.9":
+  version "4.5.9"
+  resolved "https://registry.yarnpkg.com/@types/lodash.concat/-/lodash.concat-4.5.9.tgz#4e7decc32f918cb65f5f7d3fdc22c3ab45874b2f"
+  integrity sha512-wf3uo5EYw5SzMOl9oFZtPDtc+soWjLzbZfV4CgJkesq05EQUxHu41ETQAY9E/yRdpyApedWi/jzf7gC8OuJaPw==
+  dependencies:
+    "@types/lodash" "*"
+
 "@types/lodash.difference@^4.5.9":
   version "4.5.9"
   resolved "https://registry.npmjs.org/@types/lodash.difference/-/lodash.difference-4.5.9.tgz"
@@ -207,6 +214,11 @@ jackspeak@^2.3.5:
     "@isaacs/cliui" "^8.0.2"
   optionalDependencies:
     "@pkgjs/parseargs" "^0.11.0"
+
+lodash.concat@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/lodash.concat/-/lodash.concat-4.5.0.tgz#b053ae02e4a8008582e7256b9d02bda6d0380395"
+  integrity sha512-US6b1Nqek3shg2qmv1IjTN5P7tPL1RKu77VpdGtVprxmnTI/HlsHGqI2Oa5Irznk0ZB5IXHwocMeMZK8vf4+CA==
 
 lodash.difference@^4.5.0:
   version "4.5.0"
