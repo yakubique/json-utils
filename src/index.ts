@@ -6,6 +6,7 @@ import * as sort from './modules/sort';
 import * as pick from './modules/pick';
 import * as get from './modules/get';
 import * as concat from './modules/concat';
+import * as chunk from './modules/chunk';
 import { buildOutput, inputJson, outputJson } from '@yakubique/atils/dist';
 
 enum Outputs {
@@ -30,6 +31,8 @@ const setOutputs = buildOutput(Outputs);
             result = pick.pickBy(input, inputs.key as string);
         } else if (inputs.action === get.ACTION) {
             result = get.getBy(input, inputs.key as string);
+        } else if (inputs.action === chunk.ACTION) {
+            result = chunk.chunk(input, parseInt(inputs.modifier as string, 10));
         }
 
         if (inputs.action === concat.ACTION) {

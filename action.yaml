@@ -11,9 +11,11 @@ inputs:
   secondary:
     description: 'Secondary JSON string/Value from other action (useful for some actions)'
   action:
-    description: 'What to do with input JSON (available: "diff", "get", "pick", "skip")'
+    description: 'What to do with input JSON (available: "diff", "get", "pick", "sort", "concat", "chunk")'
+    required: true
   type:
     description: 'Type of input data `["flat-json", "nested-json"]` (default: "flat-json")'
+    default: "flat-json"
   key:
     description: If `type="nested-json"` - which key should be used
   modifier:
@@ -26,7 +28,7 @@ inputs:
     default: 'false'
 outputs:
   result: # id of output
-    description: Input JSON minus `values`
+    description: Processed JSON
 runs:
   using: 'node20'
   main: 'action/index.js'

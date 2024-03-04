@@ -13,3 +13,5 @@ export enum Types {
     FlatJSON = 'flat-json',
     NestedJSON = 'nested-json'
 }
+
+export const UnknownModifier = '<unknown>';

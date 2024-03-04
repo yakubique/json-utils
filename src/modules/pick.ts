@@ -1,4 +1,4 @@
-import { Inputs } from '../common';
+import { Inputs, UnknownModifier } from '../common';
 import pick from 'lodash.pick';
 
 export const ACTION = 'pick';
@@ -8,7 +8,7 @@ export const RequiredFields: Inputs[] = [
     Inputs.Key
 ];
 
-export const ModifierValues: string[] = ['<unknown>'];
+export const ModifierValues: string[] = [UnknownModifier];
 
 export function pickBy<T>(source: T[], key: string): any[] {
     let keys = key.includes(',') ? key.split(',').filter(Boolean) : [key];

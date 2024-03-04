@@ -6,6 +6,7 @@ import * as sort from './modules/sort';
 import * as pick from './modules/pick';
 import * as get from './modules/get';
 import * as concat from './modules/concat';
+import * as chunk from './modules/chunk';
 import { getBooleanInput, getOptional, isBlank } from '@yakubique/atils/dist';
 
 export interface ActionInputs {
@@ -24,21 +25,24 @@ const availableActions = [
     sort.ACTION,
     pick.ACTION,
     get.ACTION,
-    concat.ACTION
+    concat.ACTION,
+    chunk.ACTION
 ];
 const requirements: { [key: string]: Inputs[] } = {
     [diff.ACTION]: diff.RequiredFields,
     [sort.ACTION]: sort.RequiredFields,
     [pick.ACTION]: pick.RequiredFields,
     [get.ACTION]: get.RequiredFields,
-    [concat.ACTION]: concat.RequiredFields
+    [concat.ACTION]: concat.RequiredFields,
+    [chunk.ACTION]: chunk.RequiredFields
 };
 const modifiers: { [key: string]: string[] } = {
     [diff.ACTION]: diff.ModifierValues,
     [sort.ACTION]: sort.ModifierValues,
     [pick.ACTION]: pick.ModifierValues,
     [get.ACTION]: get.ModifierValues,
-    [concat.ACTION]: concat.ModifierValues
+    [concat.ACTION]: concat.ModifierValues,
+    [chunk.ACTION]: chunk.ModifierValues
 };
 
 export function getInputs(): ActionInputs {
