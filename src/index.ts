@@ -55,7 +55,7 @@ const setOutputs = buildOutput(Outputs);
             }
         }
 
-        setOutputs({ result: outputJson(result, inputs.toFile) });
+        setOutputs({ result: outputJson(result, inputs.toFile, inputs.space) });
 
         core.info('Success!');
     } catch (err: any) {

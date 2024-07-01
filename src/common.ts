@@ -7,6 +7,7 @@ export enum Inputs {
     Key = 'key',
     FromFile = 'from_file',
     ToFile = 'to_file',
+    Space = 'space',
 }
 
 export enum Types {

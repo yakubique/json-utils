@@ -7,7 +7,7 @@ import * as pick from './modules/pick';
 import * as get from './modules/get';
 import * as concat from './modules/concat';
 import * as chunk from './modules/chunk';
-import { getBooleanInput, getOptional, isBlank } from '@yakubique/atils/dist';
+import { getBooleanInput, getNumberInput, getOptional, isBlank } from '@yakubique/atils/dist';
 
 export interface ActionInputs {
     input: string;
@@ -16,6 +16,7 @@ export interface ActionInputs {
     type: string;
     key: string | undefined;
     modifier: string | undefined;
+    space: number | undefined
     fromFile: boolean;
     toFile: boolean;
 }
@@ -76,6 +77,7 @@ export function getInputs(): ActionInputs {
 
     result.fromFile = getBooleanInput(Inputs.FromFile, { required: false });
     result.toFile = getBooleanInput(Inputs.ToFile, { required: false });
+    result.space = getNumberInput(Inputs.Space, { required: false })
 
     return result;
 }

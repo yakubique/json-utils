@@ -26,6 +26,8 @@ inputs:
   to_file:
     description: Output to file
     default: 'false'
+  space:
+    description: "`space` parameter to JSON.stringify as a number"
 outputs:
   result: # id of output
     description: Processed JSON

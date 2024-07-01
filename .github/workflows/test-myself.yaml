@@ -103,6 +103,18 @@ jobs:
         run: |
           echo "${{ steps.sort_array_to_file.outputs.result }}"
           cat "${{ steps.sort_array_to_file.outputs.result }}"
+      - name: Sort array to file with space
+        id: sort_array_to_file_space
+        uses: ./
+        with:
+          input: '["1.0.0","1.1.0","1.2.0","1.2.1","1.3.0"]'
+          action: "sort"
+          to_file: 'true'
+          space: 4
+      - name: Test 4
+        run: |
+          echo "${{ steps.sort_array_to_file_space.outputs.result }}"
+          cat "${{ steps.sort_array_to_file_space.outputs.result }}"
 
 
   test-pick:
