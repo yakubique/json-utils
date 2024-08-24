@@ -200,3 +200,20 @@ jobs:
           echo "Expecting [[1,2,3],[4,5]]"
           echo "${{ steps.concat_array.outputs.result }}"
           test "${{ steps.concat_array.outputs.result }}" == "[[1,2,3],[4,5]]"
+
+  test-none:
+    runs-on: [ "ubuntu-latest" ]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Chunk array
+        id: concat_array
+        uses: ./
+        with:
+          input: '[1,2,3,4,5]'
+          action: "none"
+      - name: Test 1
+        run: |
+          echo "Expecting [1,2,3,4,5]"
+          echo "${{ steps.concat_array.outputs.result }}"
+          test "${{ steps.concat_array.outputs.result }}" == "[1,2,3,4,5]"

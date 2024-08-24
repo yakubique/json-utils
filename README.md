@@ -12,6 +12,7 @@ For live examples, please see [actions](https://github.com/yakubique/json-utils/
 - [Get](#get)
 - [Concat](#concat)
 - [Chunk](#chunk)
+- [None](#none)
 
 ## Diff
 
@@ -20,7 +21,7 @@ For live examples, please see [actions](https://github.com/yakubique/json-utils/
 Order and values are taken from `input`. In this case it's `["1.3.0"]`
 
 ```yaml
-uses: yakubique/json-utils@v1.6
+uses: yakubique/json-utils@v1.8
 with:
   input: '["1.0.0","1.1.0","1.2.0","1.2.1","1.3.0"]'
   secondary: '["1.0.0","1.1.0","1.2.0","1.2.1"]'
@@ -32,7 +33,7 @@ with:
 It'll return nothing if change direction
 
 ```yaml
-uses: yakubique/json-utils@v1.6
+uses: yakubique/json-utils@v1.8
 with:
   input: '["1.0.0","1.1.0","1.2.0","1.2.1"]'
   secondary: '["1.0.0","1.1.0","1.2.0","1.2.1","1.3.0"]'
@@ -46,7 +47,7 @@ with:
 Find diff using `name` field in object
 
 ```yaml
-uses: yakubique/json-utils@v1.6
+uses: yakubique/json-utils@v1.8
 with:
   input: '[{"name":"v0.3.26","tag_name":"v0.3.26","prerelease":false,"published_at":"2023-08-07T09:43:28Z"},{"name":"v0.3.22","tag_name":"v0.3.22","prerelease":false,"published_at":"2023-11-12T10:58:00Z"},{"name":"v0.3.23","tag_name":"v0.3.23","prerelease":false,"published_at":"2023-11-12T10:59:27Z"},{"name":"v0.3.25","tag_name":"v0.3.25","prerelease":false,"published_at":"2023-11-12T11:01:20Z"},{"name":"v0.3.31","tag_name":"v0.3.31","prerelease":false,"published_at":"2023-11-12T11:17:17Z"},{"name":"v0.3.34","tag_name":"v0.3.34","prerelease":false,"published_at":"2023-11-12T11:21:59Z"}]'
   secondary: '[{"name":"v0.3.26","tag_name":"v0.3.26","prerelease":false,"published_at":"2023-08-07T09:43:28Z"},{"name":"v0.3.22","tag_name":"v0.3.22","prerelease":false,"published_at":"2023-11-12T10:58:00Z"},{"name":"v0.3.23","tag_name":"v0.3.23","prerelease":false,"published_at":"2023-11-12T10:59:27Z"},{"name":"v0.3.25","tag_name":"v0.3.25","prerelease":false,"published_at":"2023-11-12T11:01:20Z"},{"name":"v0.3.31","tag_name":"v0.3.31","prerelease":false,"published_at":"2023-11-12T11:17:17Z"}]'
@@ -65,7 +66,7 @@ steps:
     uses: actions/checkout@v4
   - name: Diff two arrays
     id: diff_two_arrays
-    uses: yakubique/json-utils@v1.6
+    uses: yakubique/json-utils@v1.8
     with:
       input: '["1.0.0","1.1.0","1.2.0","1.2.1","1.3.0"]'
       secondary: '["1.0.0","1.1.0","1.2.0","1.2.1"]'
@@ -84,7 +85,7 @@ steps:
 By default it's `Ascending`
 
 ```yaml
-uses: yakubique/json-utils@v1.6
+uses: yakubique/json-utils@v1.8
 with:
   input: '["1.0.0","1.1.0","1.2.0","1.2.1","1.3.0"]'
   action: "sort"
@@ -93,7 +94,7 @@ with:
 `Descending`
 
 ```yaml
-uses: yakubique/json-utils@v1.6
+uses: yakubique/json-utils@v1.8
 with:
   input: '["1.0.0","1.1.0","1.2.0","1.2.1","1.3.0"]'
   action: "sort"
@@ -105,7 +106,7 @@ with:
 Find diff using `name` field in object
 
 ```yaml
-uses: yakubique/json-utils@v1.6
+uses: yakubique/json-utils@v1.8
 with:
   input: '[{"name":"v0.3.26","tag_name":"v0.3.26","prerelease":false,"published_at":"2023-08-07T09:43:28Z"},{"name":"v0.3.22","tag_name":"v0.3.22","prerelease":false,"published_at":"2023-11-12T10:58:00Z"},{"name":"v0.3.23","tag_name":"v0.3.23","prerelease":false,"published_at":"2023-11-12T10:59:27Z"},{"name":"v0.3.25","tag_name":"v0.3.25","prerelease":false,"published_at":"2023-11-12T11:01:20Z"},{"name":"v0.3.31","tag_name":"v0.3.31","prerelease":false,"published_at":"2023-11-12T11:17:17Z"},{"name":"v0.3.34","tag_name":"v0.3.34","prerelease":false,"published_at":"2023-11-12T11:21:59Z"}]'
   action: "sort"
@@ -122,7 +123,7 @@ steps:
     uses: actions/checkout@v4
   - name: Sort array of strings
     id: sort_array
-    uses: yakubique/json-utils@v1.6
+    uses: yakubique/json-utils@v1.8
     with:
       input: '["1.0.0","1.1.0","1.2.0","1.2.1","1.3.0"]'
       action: "sort"
@@ -139,7 +140,7 @@ Creates an object composed of the picked object properties.
 
 ```yaml
 - name: Pick "name"
-  uses: yakubique/json-utils@v1.6
+  uses: yakubique/json-utils@v1.8
   with:
     input: '[{"name":"v0.3.26","tag_name":"v0.3.26","prerelease":false,"published_at":"2023-08-07T09:43:28Z"},{"name":"v0.3.22","tag_name":"v0.3.22","prerelease":false,"published_at":"2023-11-12T10:58:00Z"},{"name":"v0.3.23","tag_name":"v0.3.23","prerelease":false,"published_at":"2023-11-12T10:59:27Z"},{"name":"v0.3.25","tag_name":"v0.3.25","prerelease":false,"published_at":"2023-11-12T11:01:20Z"},{"name":"v0.3.31","tag_name":"v0.3.31","prerelease":false,"published_at":"2023-11-12T11:17:17Z"},{"name":"v0.3.34","tag_name":"v0.3.34","prerelease":false,"published_at":"2023-11-12T11:21:59Z"}]'
     action: "pick"
@@ -150,7 +151,7 @@ Works with multiple comma-separated keys
 
 ```yaml
 - name: Pick "name"
-  uses: yakubique/json-utils@v1.6
+  uses: yakubique/json-utils@v1.8
   with:
     input: '[{"name":"v0.3.26","tag_name":"v0.3.26","prerelease":false,"published_at":"2023-08-07T09:43:28Z"},{"name":"v0.3.22","tag_name":"v0.3.22","prerelease":false,"published_at":"2023-11-12T10:58:00Z"},{"name":"v0.3.23","tag_name":"v0.3.23","prerelease":false,"published_at":"2023-11-12T10:59:27Z"},{"name":"v0.3.25","tag_name":"v0.3.25","prerelease":false,"published_at":"2023-11-12T11:01:20Z"},{"name":"v0.3.31","tag_name":"v0.3.31","prerelease":false,"published_at":"2023-11-12T11:17:17Z"},{"name":"v0.3.34","tag_name":"v0.3.34","prerelease":false,"published_at":"2023-11-12T11:21:59Z"}]'
     action: "pick"
@@ -166,7 +167,7 @@ Return only value of picket object property.
 ```yaml
   - name: Get "name"
     id: get_name
-    uses: yakubique/json-utils@v1.6
+    uses: yakubique/json-utils@v1.8
     with:
       input: '[{"name":"v0.3.26","tag_name":"v0.3.26","prerelease":false,"published_at":"2023-08-07T09:43:28Z"},{"name":"v0.3.22","tag_name":"v0.3.22","prerelease":false,"published_at":"2023-11-12T10:58:00Z"},{"name":"v0.3.23","tag_name":"v0.3.23","prerelease":false,"published_at":"2023-11-12T10:59:27Z"},{"name":"v0.3.25","tag_name":"v0.3.25","prerelease":false,"published_at":"2023-11-12T11:01:20Z"},{"name":"v0.3.31","tag_name":"v0.3.31","prerelease":false,"published_at":"2023-11-12T11:17:17Z"},{"name":"v0.3.34","tag_name":"v0.3.34","prerelease":false,"published_at":"2023-11-12T11:21:59Z"}]'
       action: "get"
@@ -181,7 +182,7 @@ Concat `input` and `secondary` JSON arrays
 
 ```yaml
   - name: Concat two arrays
-    uses: yakubique/json-utils@v1.6
+    uses: yakubique/json-utils@v1.8
     with:
       input: '["1.0.0","1.1.0",]'
       secondary: '["1.2.0","1.2.1","1.3.0"]'
@@ -197,7 +198,7 @@ will be the remaining elements.
 
 ```yaml
   - name: Chunk array
-    uses: yakubique/json-utils@v1.6
+    uses: yakubique/json-utils@v1.8
     with:
       input: '[1,2,3,4,5]'
       action: "chunk"
@@ -206,20 +207,35 @@ will be the remaining elements.
   # returns: [[1,2,3],[4,5]]
 ```
 
+## None
+
+Sometimes it's OK to do nothing
+
+```yaml
+  - name: Nothing to do
+    uses: yakubique/json-utils@v1.8
+    with:
+      input: '[1,2,3,4,5]'
+      action: "none"
+
+  # returns: [1,2,3,4,5]
+```
+
 ## Inputs
 
 <!-- AUTO-DOC-INPUT:START - Do not remove or modify this section -->
 
-|   INPUT   |  TYPE  | REQUIRED |    DEFAULT    |                                          DESCRIPTION                                          |
-|-----------|--------|----------|---------------|-----------------------------------------------------------------------------------------------|
-|  action   | string |   true   |               | What to do with input JSON <br>(available: "diff", "get", "pick", "sort", "concat", "chunk")  |
-|   input   | string |   true   |               |                              JSON string/Value from other action                              |
-| secondary | string |  false   |               |         Secondary JSON string/Value from other action <br>(useful for some actions)           |
-|    key    | string |  false   |               |                    If `type="nested-json"` - which key should <br>be used                     |
-| modifier  | string |  false   |               |             Suitable modifier for performed action (ex: 'ASC'/'DESC' for 'sort')              |
-|   type    | string |  false   | `"flat-json"` |           Type of input data `["flat-json", "nested-json"]` (default: "flat-json")            |
-| from_file | string |  false   |   `"false"`   |                       Load input from file (applied to secondary too)                         |
-|  to_file  | string |  false   |   `"false"`   |                                        Output to file                                         |
+|   INPUT   |  TYPE  | REQUIRED |    DEFAULT    |                                              DESCRIPTION                                              |
+|-----------|--------|----------|---------------|-------------------------------------------------------------------------------------------------------|
+|  action   | string |   true   |               | What to do with input JSON <br>(available: "diff", "get", "pick", "sort", "concat", "chunk", "none")  |
+|   input   | string |   true   |               |                                  JSON string/Value from other action                                  |
+|    key    | string |  false   |               |                        If `type="nested-json"` - which key should <br>be used                         |
+| modifier  | string |  false   |               |                 Suitable modifier for performed action (ex: 'ASC'/'DESC' for 'sort')                  |
+| secondary | string |  false   |               |             Secondary JSON string/Value from other action <br>(useful for some actions)               |
+|   space   | string |  false   |               |                         `space` parameter to JSON.stringify as a <br>number                           |
+| from_file | string |  false   |   `"false"`   |                           Load input from file (applied to secondary too)                             |
+|  to_file  | string |  false   |   `"false"`   |                                            Output to file                                             |
+|   type    | string |  false   | `"flat-json"` |               Type of input data `["flat-json", "nested-json"]` (default: "flat-json")                |
 
 <!-- AUTO-DOC-INPUT:END -->
 

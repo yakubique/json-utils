@@ -7,6 +7,7 @@ import * as pick from './modules/pick';
 import * as get from './modules/get';
 import * as concat from './modules/concat';
 import * as chunk from './modules/chunk';
+import * as none from './modules/none';
 import { buildOutput, inputJson, outputJson } from '@yakubique/atils/dist';
 
 enum Outputs {
@@ -53,6 +54,10 @@ const setOutputs = buildOutput(Outputs);
             } else if (inputs.action === sort.ACTION) {
                 result = sort.sortBy(input, inputs.key as string, inputs.modifier);
             }
+        }
+
+        if (inputs.action === none.ACTION) {
+            result = input
         }
 
         setOutputs({ result: outputJson(result, inputs.toFile, inputs.space) });
